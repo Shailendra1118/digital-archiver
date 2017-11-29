@@ -1,0 +1,92 @@
+<html ng-app="archive">
+<head>
+<meta charset="utf8" />
+<title>Document Upload</title>
+<link rel="stylesheet" href="styles/styles.css"/>
+
+
+<script src="lib/angular/angular-1.2.16.js"></script>
+
+
+
+
+</head>
+<body>
+	<div border=1 id="wrap">
+		<div id="header">
+			<h1>Document Upload</h1>
+		</div>
+	</div>
+
+	<div ng-controller="UploadCtrl">
+
+		<form class="form-inline" >
+			<div class="form-group">
+				<label class="inputPadding" style="padding-top:10px;">Customer Id:</label> <label
+					ng-model="customerId"></label>
+
+			</div>
+
+			<div class="form-group">
+				<label class="inputPadding" style="padding-top:50px;">Upload Date:</label> <label
+					ng-model="uploadDate"></label>
+			</div>
+
+			<div class="form-group">
+				<label class="inputPadding" >File Type:</label> 
+				<select
+					ng-model="fileType" ng-options="x for x in names">
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label class="inputPadding" >File Source:</label> <label
+					ng-model="fileSource">Customer Computer</label>
+			</div>
+
+			<div class="form-group">
+				<label class="inputPadding" >Digital Sign:</label> 
+				<input
+					type="radio" ng-model="digitalSign" name="Yes" value="Yes">
+					<label for="contactChoice2">Yes</label>
+					</input>
+					<input
+					type="radio" ng-model="digitalSign" name="No" value="No">
+					<label for="contactChoice2">No</label>
+					</input>
+					
+			</div>
+
+
+			<div class="form-group">
+				<label class="inputPadding" >Digital Sign Source:</label> 
+				<label	ng-model="digitalSignSource" value="NA">NA</label>
+			</div>
+
+			<div class="form-group">
+			<input type="file" class="custom-file-input" file-model="myFile"></td>
+				<button ng-click="uploadFile()">Upload</button>
+			</div>
+
+		</form>
+
+
+
+</div>
+
+		
+
+		<div id="footer">
+			<p>Footer</p>
+		</div>
+	
+
+	<script src="app.js"></script>
+<script>
+var app = angular.module('archive', []);
+app.controller('UploadCtrl', function($scope) {
+    $scope.names = ["ID Proof", "Address Proof", "Age Proof"];
+});
+</script>
+</body>
+</html>
