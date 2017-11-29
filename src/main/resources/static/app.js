@@ -57,6 +57,7 @@ app.service('fileUpload', ['$http','ArchiveService', function($http, ArchiveServ
 app.controller('UploadCtrl', [ '$scope', 'fileUpload',
 		function($scope, fileUpload) {
 			$scope.uploadFile = function() {
+				
 				var file = $scope.myFile;
 				var customerId = $scope.customerId;
 				var uploadDate = $scope.uploadDate;
@@ -85,12 +86,12 @@ app.controller('ArchiveCtrl', function($scope, $http) {
 	};
 });
 
-app.run(function($rootScope, $http) {
+/*app.run(function($rootScope, $http) {
 	$http.get("http://localhost:8080/archive/documents").success(
 			function(response) {
 				$rootScope.metadataList = response;
 			});
-});
+});*/
 
 function sortByLabel(claims) {
 	claims.sort(function(a, b) {
