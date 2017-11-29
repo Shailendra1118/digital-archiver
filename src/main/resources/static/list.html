@@ -1,0 +1,69 @@
+<html ng-app="archive">
+<head>
+<meta charset="utf8" />
+<title>Document Archive</title>
+<link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+			<h1>Document Archive</h1>
+		</div>
+		<div id="main" ng-controller="ArchiveCtrl">
+			<h2>Documents</h2>
+			<table class="table">
+			<tr>
+				<td>Document Type</td>
+				<td>Document Source</td>
+<!-- 				<td>Customer Id</td> -->
+<!-- 				<td>Upload Date</td> -->
+<!-- 				<td>Digital Sign</td> -->
+<!-- 				<td>Digital Sign Source</td> -->
+				
+			
+        	
+			</tr>
+			<tr>
+				<td><input type="text" ng-model="fileType"
+					ng-change="search(customerId,uploadDate,fileType, fileSource,digitalSign, digitalSignSource  );" /></td>
+				<td><input type="text" ng-model="fileSource"
+					ng-change="search(customerId,uploadDate,fileType, fileSource,digitalSign, digitalSignSource  );" /></td>
+<!-- 				<td><input type="text" ng-model="customerId" -->
+<!-- 					ng-change="search(customerId,uploadDate,fileType, fileSource,digitalSign, digitalSignSource  );" /></td> -->
+<!-- 				<td><input type="text" ng-model="uploadDate" -->
+<!-- 					ng-change="search(customerId,uploadDate,fileType, fileSource,digitalSign, digitalSignSource  );" /></td> -->
+<!-- 				<td><input type="text" ng-model="digitalSign" -->
+<!-- 					ng-change="search(customerId,uploadDate,fileType, fileSource,digitalSign, digitalSignSource  );" /></td> -->
+<!-- 				<td><input type="text" ng-model="digitalSignSource" -->
+<!-- 					ng-change="search(customerId,uploadDate,fileType, fileSource,digitalSign, digitalSignSource  );" /></td> -->
+					
+			</tr>
+		</table>
+		<table id="table-6">
+			<thead>
+    			<tr>
+    				<th>File</th>
+    				<th>Person</th>
+    				<th>Date</th>
+    			</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="metadata in metadataList">
+					<td><a href="/archive/document/{{metadata.uuid}}">{{metadata.fileName}}</a></td>
+					<td><a href="/archive/document/{{metadata.uuid}}">{{metadata.personName}}</a></td>
+					<td><a href="/archive/document/{{metadata.uuid}}">{{metadata.documentDate | date:'yyyy-MM-dd'}}</a></td>
+				</tr>
+			</tbody>		
+		</table>
+		</div>
+		
+		
+		
+		<div id="footer">
+			<p>Footer</p>
+		</div>
+	</div>
+	<script src="lib/angular/angular-1.2.16.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>

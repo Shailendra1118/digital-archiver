@@ -29,7 +29,7 @@ public interface IArchiveService {
      * @param date The date of a document, may be null
      * @return A list of document meta data
      */
-    List<DocumentMetadata> findDocuments(String personName, Date date);
+ //   List<DocumentMetadata> findDocuments(String personName, Date date);
     
     
     /**
@@ -39,5 +39,5 @@ public interface IArchiveService {
      * @param id The id of a document
      * @return A document file
      */
-    byte[] getDocumentFile(String id);
+   // byte[] getDocumentFile(String id);
 }

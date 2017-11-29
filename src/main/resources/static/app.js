@@ -31,11 +31,17 @@ app.service('ArchiveService', [ '$http', '$rootScope', function($http, $rootScop
 }]);
 
 app.service('fileUpload', ['$http','ArchiveService', function($http, ArchiveService) {
-	this.uploadFileToUrl = function(uploadUrl, file, name, date) {
+	this.uploadFileToUrl = function(uploadUrl, file, customerId,uploadDate,fileType, fileSource,digitalSign, digitalSignSource) {
 		var fd = new FormData();
 		fd.append('file', file);
-		fd.append('person', name);
-		fd.append('date', date);
+		fd.append('customerId', customerId);
+		fd.append('uploadDate', uploadDate);
+		
+		fd.append('fileType', fileType);
+		fd.append('fileSource', fileSource);
+		fd.append('digitalSign', digitalSign);
+		fd.append('digitalSignSource', digitalSignSource);
+	
 		$http.post(uploadUrl, fd, {
 			transformRequest : angular.identity,
 			headers : {
@@ -52,11 +58,17 @@ app.controller('UploadCtrl', [ '$scope', 'fileUpload',
 		function($scope, fileUpload) {
 			$scope.uploadFile = function() {
 				var file = $scope.myFile;
-				var name = $scope.name;
-				var date = $scope.date;
+				var customerId = $scope.customerId;
+				var uploadDate = $scope.uploadDate;
+				
+				var fileType = $scope.fileType;
+				var fileSource = $scope.fileSource;
+				var digitalSign = $scope.digitalSign;
+				var digitalSignSource = $scope.digitalSignSource;
+				
 				console.log('file is ' + JSON.stringify(file));
 				var uploadUrl = "/archive/upload";
-				fileUpload.uploadFileToUrl(uploadUrl, file, name, date);
+				fileUpload.uploadFileToUrl(uploadUrl, file, customerId,uploadDate,fileType, fileSource,digitalSign, digitalSignSource);
 			};
 		} ]);
 

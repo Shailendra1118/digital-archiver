@@ -68,23 +68,23 @@ public class FileSystemDocumentDao implements IDocumentDao {
         }
     }
     
-    /**
-     * Finds documents in the data store matching the given parameter.
-     * To find a document all document meta data sets are iterated to check if they match
-     * the parameter.
-     * 
-     * @see org.digital.archive.dao.IDocumentDao#findByPersonNameDate(java.lang.String, java.util.Date)
-     */
-    @Override
-    public List<DocumentMetadata> findByPersonNameDate(String personName, Date date) {
-        try {
-            return findInFileSystem(personName,date);
-        } catch (IOException e) {
-            String message = "Error while finding document, person name: " + personName + ", date:" + date;
-            LOG.error(message, e);
-            throw new RuntimeException(message, e);
-        }
-    }
+//    /**
+//     * Finds documents in the data store matching the given parameter.
+//     * To find a document all document meta data sets are iterated to check if they match
+//     * the parameter.
+//     * 
+//     * @see org.digital.archive.dao.IDocumentDao#findByPersonNameDate(java.lang.String, java.util.Date)
+//     */
+//    @Override
+//    public List<DocumentMetadata> findByPersonNameDate(String personName, Date date) {
+//        try {
+//            return findInFileSystem(personName,date);
+//        } catch (IOException e) {
+//            String message = "Error while finding document, person name: " + personName + ", date:" + date;
+//            LOG.error(message, e);
+//            throw new RuntimeException(message, e);
+//        }
+//    }
     
     /**
      * Returns the document from the data store with the given UUID.
@@ -104,31 +104,31 @@ public class FileSystemDocumentDao implements IDocumentDao {
     }
     
 
-    private List<DocumentMetadata> findInFileSystem(String personName, Date date) throws IOException  {
-        List<String> uuidList = getUuidList();
-        List<DocumentMetadata> metadataList = new ArrayList<DocumentMetadata>(uuidList.size());
-        for (String uuid : uuidList) {
-            DocumentMetadata metadata = loadMetadataFromFileSystem(uuid);         
-            if(isMatched(metadata, personName, date)) {
-                metadataList.add(metadata);
-            }
-        }
-        return metadataList;
-    }
+//    private List<DocumentMetadata> findInFileSystem(String personName, Date date) throws IOException  {
+//        List<String> uuidList = getUuidList();
+//        List<DocumentMetadata> metadataList = new ArrayList<DocumentMetadata>(uuidList.size());
+//        for (String uuid : uuidList) {
+//            DocumentMetadata metadata = loadMetadataFromFileSystem(uuid);         
+//            if(isMatched(metadata, personName, date)) {
+//                metadataList.add(metadata);
+//            }
+//        }
+//        return metadataList;
+//    }
 
-    private boolean isMatched(DocumentMetadata metadata, String personName, Date date) {
-        if(metadata==null) {
-            return false;
-        }
-        boolean match = true;
-        if(personName!=null) {
-            match = (personName.equals(metadata.getPersonName()));
-        }
-        if(match && date!=null) {
-            match = (date.equals(metadata.getDocumentDate()));
-        }
-        return match;
-    }
+//    private boolean isMatched(DocumentMetadata metadata, String personName, Date date) {
+//        if(metadata==null) {
+//            return false;
+//        }
+//        boolean match = true;
+//        if(personName!=null) {
+//            match = (personName.equals(metadata.getPersonName()));
+//        }
+//        if(match && date!=null) {
+//            match = (date.equals(metadata.getDocumentDate()));
+//        }
+//        return match;
+//    }
 
     private DocumentMetadata loadMetadataFromFileSystem(String uuid) throws IOException {
         DocumentMetadata document = null;
