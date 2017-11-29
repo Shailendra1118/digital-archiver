@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <title>GreenDocs Sign-in</title>
         <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="302333915444-pqfhp4kk85dqjq5eg5i01934f18mpsvf.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <title></title>
     <style type="text/css">
         .auto-style1 {
             height: 23px;
@@ -25,6 +25,26 @@
     </style>
 </head>
 <body>
+        <script>
+            function onSignIn(googleUser) {
+                // Useful data for your client-side scripts:
+                var profile = googleUser.getBasicProfile();
+                console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+                console.log('Full Name: ' + profile.getName());
+                console.log('Given Name: ' + profile.getGivenName());
+                console.log('Family Name: ' + profile.getFamilyName());
+                console.log("Image URL: " + profile.getImageUrl());
+                console.log("Email: " + profile.getEmail());
+
+                // The ID token you need to pass to your backend:
+                var id_token = googleUser.getAuthResponse().id_token;
+                console.log("ID Token: " + id_token);
+            };
+            function onFailure() {
+                alert("Failed!")
+            }
+    </script>
+
     <form action="SplashPage.html">
     <table style="padding: 0px; border-width: 0px; width:100%; border-spacing: 0px;top:0px;">
         <tr style="background-color: #C0C0C0;height:90px">
@@ -79,21 +99,17 @@
         </tr>
         <tr>
             <td class="auto-style3">&nbsp;</td>
-            <td><a href="home.html">
-            <input type="submit" value=" Login " style="background-color: #3399FF; color: #FFFFFF; 
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-weight: bold" />
-            </a>
-            </td>
+            <td><input type="submit" value=" Login " style="background-color: #3399FF; color: #FFFFFF; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-weight: bold" /></td>
             <td>&nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style3">&nbsp;</td>
-            <td>----------------------------------------------- OR ------------------------------------</td>
+            <td class="auto-style3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR </td>
             <td>&nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style3">&nbsp;</td>
-            <td><img alt="" src="GoogleSignin.png"/></td>
+            <td><div class="g-signin2" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark"></div></td>
             <td>&nbsp;</td>
         </tr>
         <tr>
@@ -108,6 +124,26 @@
         </tr>
         <tr>
             <td class="auto-style3">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style3"></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style3"></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style3"></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style3"></td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
         </tr>

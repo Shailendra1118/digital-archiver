@@ -2,91 +2,94 @@
 <head>
 <meta charset="utf8" />
 <title>Document Upload</title>
-<link rel="stylesheet" href="styles/styles.css"/>
-
-
-<script src="lib/angular/angular-1.2.16.js"></script>
-
-
-
-
+<link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
 	<div border=1 id="wrap">
 		<div id="header">
 			<h1>Document Upload</h1>
 		</div>
-	</div>
-
-	<div ng-controller="UploadCtrl">
-
-		<form class="form-inline" >
-			<div class="form-group">
-				<label class="inputPadding" style="padding-top:10px;">Customer Id:</label> <label
-					ng-model="customerId"></label>
-
-			</div>
-
-			<div class="form-group">
-				<label class="inputPadding" style="padding-top:50px;">Upload Date:</label> <label
-					ng-model="uploadDate"></label>
-			</div>
-
-			<div class="form-group">
-				<label class="inputPadding" >File Type:</label> 
-				<select
-					ng-model="fileType" ng-options="x for x in names">
-				</select>
-			</div>
-
-			<div class="form-group">
-				<label class="inputPadding" >File Source:</label> <label
-					ng-model="fileSource">Customer Computer</label>
-			</div>
-
-			<div class="form-group">
-				<label class="inputPadding" >Digital Sign:</label> 
-				<input
-					type="radio" ng-model="digitalSign" name="Yes" value="Yes">
-					<label for="contactChoice2">Yes</label>
-					</input>
-					<input
-					type="radio" ng-model="digitalSign" name="No" value="No">
-					<label for="contactChoice2">No</label>
-					</input>
-					
-			</div>
-
-
-			<div class="form-group">
-				<label class="inputPadding" >Digital Sign Source:</label> 
-				<label	ng-model="digitalSignSource" value="NA">NA</label>
-			</div>
-
-			<div class="form-group">
-			<input type="file" class="custom-file-input" file-model="myFile"></td>
-				<button ng-click="uploadFile()">Upload</button>
-			</div>
-
-		</form>
-
-
-
-</div>
-
-		
-
-		<div id="footer">
-			<p>Footer</p>
-		</div>
 	
+		
+		<div  ng-controller="UploadCtrl">
+			
+			<table border=1 class="table">
+				<tr>
+					<td>Customer Id</td>
+				</tr>
+				<tr>
+					<td>
+					 <label ng-model="customerId"></label>
+					</td>
+				</tr>
+				<tr>
+					<td>uploadDate</td>
+				</tr>
+				<tr>
+				<td>
+					 <label ng-model="uploadDate">date()</label>
+					</td>
+					
+				</tr>
+				
+				<tr>
+					<td>fileType</td>
+				</tr>
+				<tr>
+				
 
-	<script src="app.js"></script>
+<select ng-model="fileType" ng-options="x for x in names">
+</select>
+
+
+
 <script>
 var app = angular.module('archive', []);
 app.controller('UploadCtrl', function($scope) {
     $scope.names = ["ID Proof", "Address Proof", "Age Proof"];
 });
 </script>
+
+
+					
+				</tr>
+				
+				<tr>
+					<td>File Source</td>
+				</tr>
+				<tr>
+					<td> <label ng-model="fileSource">Customer Computer</label>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Digital Sign</td>
+				</tr>
+				<tr>
+					<td><input type="text" ng-model="digitalSign" value="No" ></td>
+				</tr>
+				
+				<tr>
+					<td>Digital Sign Source</td>
+				</tr>
+				<tr>
+					<td><input type="text" ng-model="digitalSignSource" value="NA" ></td>
+				</tr>
+				
+				<tr>
+					<td><input type="file" class="custom-file-input" file-model="myFile"></td>
+					
+				</tr>
+				<tr>
+					<td><button ng-click="uploadFile()">Upload</button></td>
+				</tr>
+			</table>
+		</div>
+		<div id="footer">
+			<p>Footer</p>
+		</div>
+	</div>
+	<script src="lib/angular/angular-1.2.16.js"></script>
+	<script src="app.js"></script>
 </body>
 </html>
