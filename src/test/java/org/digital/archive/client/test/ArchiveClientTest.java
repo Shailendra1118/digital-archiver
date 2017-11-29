@@ -46,13 +46,72 @@ public class ArchiveClientTest {
     @Before
     public void setUp() throws IOException {
         client = new ArchiveServiceClient();
-     //   testUpload();
+        testUpload();
     }
 
     @After
     public void tearDown() {
-      //  deleteDirectory(new File(FileSystemDocumentDao.DIRECTORY));
+        deleteDirectory(new File(FileSystemDocumentDao.DIRECTORY));
     }
 
-   
+//    @Test
+//    public void testFindDocuments() {
+//        List<DocumentMetadata> result = client.findDocuments(getPersonName(), null);
+//        assertNotNull("Result is null", result);
+//        assertTrue("Result is empty", !result.isEmpty());
+//        for (DocumentMetadata documentMetadata : result) {
+//            assertEquals("Person name is not : " + getPersonName(), getPersonName(), documentMetadata.getPersonName());
+//        }
+//    }
+
+    @Test
+    public void testUpload() throws IOException {
+        List<String> fileList = getFileList();
+        for (String fileName : fileList) {
+            uploadFile(fileName);
+        }
+    //    testFindDocuments();
+    }
+
+    private void uploadFile(String fileName) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        sb.append(TEST_FILE_DIR).append(File.separator).append(fileName);
+        Path path = Paths.get(sb.toString());
+        byte[] fileData = Files.readAllBytes(path);
+        Date today = Calendar.getInstance().getTime();
+        String personName = getPersonName();        
+    //    DocumentMetadata metadata = client.save(new Document(fileData, fileName, today, personName));
+        if (LOG.isDebugEnabled()) {
+       //     LOG.debug("Document saved, uuid: " + metadata.getUuid());
+        }
+    }
+
+    private String getPersonName() {
+        return this.getClass().getSimpleName();
+    }
+
+    private List<String> getFileList() {
+        File file = new File(TEST_FILE_DIR);
+        String[] files = file.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File current, String name) {
+                return new File(current, name).isFile();
+            }
+        });
+        return Arrays.asList(files);
+    }
+
+    public static boolean deleteDirectory(File path) {
+        if (path.exists()) {
+            File[] files = path.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isDirectory()) {
+                    deleteDirectory(files[i]);
+                } else {
+                    files[i].delete();
+                }
+            }
+        }
+        return (path.delete());
+    }
 }
