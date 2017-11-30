@@ -30,7 +30,7 @@ public interface IDocumentDao {
      * @param date The date of a document, may be null
      * @return A list of document meta data
      */
- //   List<DocumentMetadata> findByPersonNameDate(String personName, Date date);
+    List<DocumentMetadata> findByPersonNameDate(String personName, Date date);
     
     /**
      * Returns the document from the data store with the given id.

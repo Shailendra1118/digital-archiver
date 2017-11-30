@@ -51,40 +51,29 @@ public class ArchiveServiceClient implements IArchiveService {
     private DocumentMetadata doSave(Document document) throws IOException, FileNotFoundException {
         String tempFilePath = writeDocumentToTempFile(document);
         MultiValueMap<String, Object> parts = createMultipartFileParam(tempFilePath);
-        String dateString = DocumentMetadata.DATE_FORMAT.format(document.getUploadDate());
-        
-        String fileType = document.getFileType();       
-         String fileSource   = document.getFileSource();;      
-         String customerId  = document.getCustomerId();;
-         String digitalSign  = document.getDigitalSign();
-         String digitalSignSource  = document.getDigitalSignSource();
-        
-        DocumentMetadata documentMetadata = getRestTemplate().postForObject(getServiceUrl() +
-        		"/upload?customerId={customerId}&uploadDate={uploadDate}&fileType={fileType}&fileSource={fileSource}&digitalSign={digitalSign}&digitalSignSource={digitalSignSource}"
-        	, parts, 
+        String dateString = DocumentMetadata.DATE_FORMAT.format(document.getDocumentDate());
+        DocumentMetadata documentMetadata = getRestTemplate().postForObject(getServiceUrl() + "/upload?person={name}&date={date}", 
+                parts, 
                 DocumentMetadata.class,
-                customerId, 
-                dateString,fileType, fileSource, digitalSign, digitalSignSource                
-        		);
+                document.getPersonName(), 
+                dateString);
         return documentMetadata;
     }
 
-//    @Override
-//    public byte[] getDocumentFile(String id) {
-//        return getRestTemplate().getForObject(getServiceUrl() +  "/document/{id}", byte[].class, id);
-//    }
+    @Override
+    public byte[] getDocumentFile(String id) {
+        return getRestTemplate().getForObject(getServiceUrl() +  "/document/{id}", byte[].class, id);
+    }
 
-//    @Override
-//    public List<DocumentMetadata> findDocuments(String personName, Date date) {
-//        String dateString = null;
-//        if(date!=null) {           
-//            dateString = DocumentMetadata.DATE_FORMAT.format(date);
-//        }
-//        DocumentMetadata[] result = getRestTemplate().getForObject(getServiceUrl() +
-//        		"documents?person={name}&date={date}", 
-//        		DocumentMetadata[].class, personName, dateString);
-//        return Arrays.asList(result);
-//    }
+    @Override
+    public List<DocumentMetadata> findDocuments(String personName, Date date) {
+        String dateString = null;
+        if(date!=null) {           
+            dateString = DocumentMetadata.DATE_FORMAT.format(date);
+        }
+        DocumentMetadata[] result = getRestTemplate().getForObject(getServiceUrl() +  "documents?person={name}&date={date}", DocumentMetadata[].class, personName, dateString);
+        return Arrays.asList(result);
+    }
     
     private MultiValueMap<String, Object> createMultipartFileParam(String tempFilePath) {
         MultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();           
