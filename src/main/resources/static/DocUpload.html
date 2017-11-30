@@ -4,6 +4,8 @@
     <title>Upload a New Document</title>
 
 <script src="lib/angular/angular-1.2.16.js"></script>
+<script src="dropbx.js"></script>
+<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="9ezm2u0tlz9a23u"></script>
 
 <link rel="stylesheet" href="styles/styles.css"/>
 
@@ -91,9 +93,9 @@
         </tr>
         <tr>
             <td class="auto-style3"><img alt="" height="50" src="VerifyDocs.png" width="50" />Verify Documents</td>
-            <td class="styleDocs" style="background-color: #F4F4F4"><img alt="" height="50" src="Dropbox.png" width="50" />&nbsp;&nbsp;Select Files from Dropbox
-            
-            </td>
+<!--             <td class="styleDocs" style="background-color: #F4F4F4"><img alt="" height="50" src="Dropbox.png" width="50" />&nbsp;&nbsp;Select Files from Dropbox -->
+<!--             </td> -->
+			<td class="styleDocs" style="background-color: #F4F4F4"><div id="container"></div></td>
             <td>&nbsp;</td>
         </tr>
         <tr>
