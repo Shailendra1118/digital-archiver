@@ -40,20 +40,30 @@
             <td class="auto-style1"></td>
         </tr>
         <tr>
-            <td class="auto-style3">Welcome!</td>            
-            <td ><input type="text" id="TP" value=" " />My Dashboard</td>
+            <td class="auto-style3">Welcome!&nbsp;
+            
+            <script>
+	window.onload = (function(){
+	    return function(){
+	    	document.getElementById("loggedInName").innerHTML =  sessionStorage.getItem('username');
+	     };
+	})();
+</script>
+
+            </td>            
+            <td >My Dashboard</td>
             <td>&nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style3">
                <a href="list.html"> <img alt="" height="50" src="ViewDocs2.png" width="50"  />View My Documents</a></td>
-            <td class="styleDocs"><input type="text" id="Count" value=" " /> 2 Documents Uploaded</td>
+            <td class="styleDocs">2 Documents Uploaded</td>
             <td>&nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style3">
               <a href="DocUpload.html">  <img alt="" height="50" src="Cloud2.png" width="50" />Upload New Document</a></td>
-            <td class="styleDocs"><input type="text" id="Count2" value=" "/> 1 Document To Sign</td>
+            <td class="styleDocs">1 Document To Sign</td>
             <td>&nbsp;</td>
         </tr>
         <tr>
@@ -108,12 +118,6 @@
 
 </body>
 
-<script>
-	window.onload = (function(){
-	    return function(){
-	    	document.getElementById("loggedInName").innerHTML = "Hello " + sessionStorage.getItem('username');
-	     };
-	})();
-</script>
+
 
 </html>

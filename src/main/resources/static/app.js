@@ -42,7 +42,7 @@ app.service('fileUpload', ['$http','ArchiveService', function($http, ArchiveServ
 				'Content-Type' : undefined
 			}
 		}).success(function() {
-			ArchiveService.search(null, null);
+			alert("File Uploaded Successfully!")
 		}).error(function() {
 		});
 	}
