@@ -63,18 +63,11 @@ public class ArchiveController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public @ResponseBody DocumentMetadata handleFileUpload(
             @RequestParam(value="file", required=true) MultipartFile file ,
-            @RequestParam(value="customerId", required=true) String customerId,
-            @RequestParam(value="uploadDate", required=true) @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
-            @RequestParam(value="fileType", required=true) String fileType,
-            @RequestParam(value="fileSource", required=true) String fileSource,
-            @RequestParam(value="digitalSign", required=false) String digitalSign,
-            @RequestParam(value="digitalSignSource", required=false) String digitalSignSource
-    		) {
-        LOG.debug("hi");
+            @RequestParam(value="person", required=true) String person,
+            @RequestParam(value="date", required=true) @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
+        
         try {
-            Document document = new Document(file.getBytes(), file.getOriginalFilename(), date, customerId, fileType, fileSource, digitalSign, digitalSignSource );
-            
-             		
+            Document document = new Document(file.getBytes(), file.getOriginalFilename(), date, person );
             getArchiveService().save(document);
             return document.getMetadata();
         } catch (RuntimeException e) {
@@ -86,41 +79,40 @@ public class ArchiveController {
         }      
     }
     
-//    /**
-//     * Finds document in the archive. Returns a list of document meta data 
-//     * which does not include the file data. Use getDocument to get the file.
-//     * Returns an empty list if no document was found.
-//     * 
-//     * Url: /archive/documents?person={person}&date={date} [GET]
-//     * 
-//     * @param person The name of the uploading person
-//     * @param date The date of the document
-//     * @return A list of document meta data
-//     */
-//    @RequestMapping(value = "/documents", method = RequestMethod.GET)
-//    public HttpEntity<List<DocumentMetadata>> findDocument(
-//            @RequestParam(value="person", required=false) String person,
-//            @RequestParam(value="person", required=false) String person,
-//            @RequestParam(value="date", required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        return new ResponseEntity<List<DocumentMetadata>>(getArchiveService().findDocuments(person,date), httpHeaders,HttpStatus.OK);
-//    }
+    /**
+     * Finds document in the archive. Returns a list of document meta data 
+     * which does not include the file data. Use getDocument to get the file.
+     * Returns an empty list if no document was found.
+     * 
+     * Url: /archive/documents?person={person}&date={date} [GET]
+     * 
+     * @param person The name of the uploading person
+     * @param date The date of the document
+     * @return A list of document meta data
+     */
+    @RequestMapping(value = "/documents", method = RequestMethod.GET)
+    public HttpEntity<List<DocumentMetadata>> findDocument(
+            @RequestParam(value="person", required=false) String person,
+            @RequestParam(value="date", required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        return new ResponseEntity<List<DocumentMetadata>>(getArchiveService().findDocuments(person,date), httpHeaders,HttpStatus.OK);
+    }
     
-//    /**
-//     * Returns the document file from the archive with the given UUID.
-//     * 
-//     * Url: /archive/document/{id} [GET]
-//     * 
-//     * @param id The UUID of a document
-//     * @return The document file
-//     */
-//    @RequestMapping(value = "/document/{id}", method = RequestMethod.GET)
-//    public HttpEntity<byte[]> getDocument(@PathVariable String id) {         
-//        // send it back to the client
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.setContentType(MediaType.IMAGE_JPEG);
-//        return new ResponseEntity<byte[]>(getArchiveService().getDocumentFile(id), httpHeaders, HttpStatus.OK);
-//    }
+    /**
+     * Returns the document file from the archive with the given UUID.
+     * 
+     * Url: /archive/document/{id} [GET]
+     * 
+     * @param id The UUID of a document
+     * @return The document file
+     */
+    @RequestMapping(value = "/document/{id}", method = RequestMethod.GET)
+    public HttpEntity<byte[]> getDocument(@PathVariable String id) {         
+        // send it back to the client
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<byte[]>(getArchiveService().getDocumentFile(id), httpHeaders, HttpStatus.OK);
+    }
 
     public IArchiveService getArchiveService() {
         return archiveService;

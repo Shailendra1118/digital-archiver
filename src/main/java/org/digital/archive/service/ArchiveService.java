@@ -23,7 +23,7 @@ public class ArchiveService implements IArchiveService, Serializable {
 
     /**
      * Saves a document in the archive.
-     * @see org.digital.archive.service.IArchiveService#save(org.digital.archive.service.Document)
+     * @see org.murygin.archive.service.IArchiveService#save(org.murygin.archive.service.Document)
      */
     @Override
     public DocumentMetadata save(Document document) {
@@ -31,28 +31,28 @@ public class ArchiveService implements IArchiveService, Serializable {
         return document.getMetadata();
     }
     
-//    /**
-//     * Finds document in the archive
-//     * @see org.digital.archive.service.IArchiveService#findDocuments(java.lang.String, java.util.Date)
-//     */
-//    @Override
-//    public List<DocumentMetadata> findDocuments(String personName, Date date) {
-//        return getDocumentDao().findByPersonNameDate(personName, date);
-//    }
-//    
-//    /**
-//     * Returns the document file from the archive
-//     * @see org.digital.archive.service.IArchiveService#getDocumentFile(java.lang.String)
-//     */
-//    @Override
-//    public byte[] getDocumentFile(String id) {
-//        Document document = getDocumentDao().load(id);
-//        if(document!=null) {
-//            return document.getFileData();
-//        } else {
-//            return null;
-//        }
-//    }
+    /**
+     * Finds document in the archive
+     * @see org.murygin.archive.service.IArchiveService#findDocuments(java.lang.String, java.util.Date)
+     */
+    @Override
+    public List<DocumentMetadata> findDocuments(String personName, Date date) {
+        return getDocumentDao().findByPersonNameDate(personName, date);
+    }
+    
+    /**
+     * Returns the document file from the archive
+     * @see org.murygin.archive.service.IArchiveService#getDocumentFile(java.lang.String)
+     */
+    @Override
+    public byte[] getDocumentFile(String id) {
+        Document document = getDocumentDao().load(id);
+        if(document!=null) {
+            return document.getFileData();
+        } else {
+            return null;
+        }
+    }
 
 
     public IDocumentDao getDocumentDao() {

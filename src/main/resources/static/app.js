@@ -31,24 +31,18 @@ app.service('ArchiveService', [ '$http', '$rootScope', function($http, $rootScop
 }]);
 
 app.service('fileUpload', ['$http','ArchiveService', function($http, ArchiveService) {
-	this.uploadFileToUrl = function(uploadUrl, file, customerId,uploadDate,fileType, fileSource,digitalSign, digitalSignSource) {
+	this.uploadFileToUrl = function(uploadUrl, file, name, date) {
 		var fd = new FormData();
 		fd.append('file', file);
-		fd.append('customerId', customerId);
-		fd.append('uploadDate', uploadDate);
-		
-		fd.append('fileType', fileType);
-		fd.append('fileSource', fileSource);
-		fd.append('digitalSign', digitalSign);
-		fd.append('digitalSignSource', digitalSignSource);
-	
+		fd.append('person', name);
+		fd.append('date', date);
 		$http.post(uploadUrl, fd, {
 			transformRequest : angular.identity,
 			headers : {
 				'Content-Type' : undefined
 			}
 		}).success(function() {
-			ArchiveService.search(null, null);
+			alert("File Uploaded Successfully!")
 		}).error(function() {
 		});
 	}
@@ -57,19 +51,27 @@ app.service('fileUpload', ['$http','ArchiveService', function($http, ArchiveServ
 app.controller('UploadCtrl', [ '$scope', 'fileUpload',
 		function($scope, fileUpload) {
 			$scope.uploadFile = function() {
-				
 				var file = $scope.myFile;
-				var customerId = $scope.customerId;
-				var uploadDate = $scope.uploadDate;
+				var name = $scope.name;
+				//var date = new Date();
 				
-				var fileType = $scope.fileType;
-				var fileSource = $scope.fileSource;
-				var digitalSign = $scope.digitalSign;
-				var digitalSignSource = $scope.digitalSignSource;
+				var today = new Date();
+				var dd = today.getDate();
+				var mm = today.getMonth()+1; //January is 0!
+
+				var yyyy = today.getFullYear();
+				if(dd<10){
+				    dd='0'+dd;
+				} 
+				if(mm<10){
+				    mm='0'+mm;
+				} 
+				var date = yyyy + '-' + mm + '-' + dd;
+				//var date='2017-01-01';
 				
 				console.log('file is ' + JSON.stringify(file));
 				var uploadUrl = "/archive/upload";
-				fileUpload.uploadFileToUrl(uploadUrl, file, customerId,uploadDate,fileType, fileSource,digitalSign, digitalSignSource);
+				fileUpload.uploadFileToUrl(uploadUrl, file, name, date);
 			};
 		} ]);
 
@@ -86,12 +88,12 @@ app.controller('ArchiveCtrl', function($scope, $http) {
 	};
 });
 
-/*app.run(function($rootScope, $http) {
+app.run(function($rootScope, $http) {
 	$http.get("http://localhost:8080/archive/documents").success(
 			function(response) {
 				$rootScope.metadataList = response;
 			});
-});*/
+});
 
 function sortByLabel(claims) {
 	claims.sort(function(a, b) {

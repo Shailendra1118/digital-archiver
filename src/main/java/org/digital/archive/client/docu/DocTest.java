@@ -2,13 +2,13 @@ package org.digital.archive.client.docu;
 
 //Download API Client and add to your project: 
 		// https://github.com/docusign/docuSign-java-client
-		import com.docusign.esign.api.*;
-		import com.docusign.esign.client.*;
-		import com.docusign.esign.model.*;
+//		import com.docusign.esign.api.*;
+//		import com.docusign.esign.client.*;
+//		import com.docusign.esign.model.*;
 		
 public class DocTest {
 
-	public static void main(String args[]){
+	/*public static void main(String args[]){
 		
 		
 
@@ -51,5 +51,5 @@ public class DocTest {
 		{
 			System.out.println("Exception: " + ex);
 		}
-	}
+	}*/
 }

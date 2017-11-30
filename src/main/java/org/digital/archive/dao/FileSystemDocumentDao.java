@@ -53,7 +53,7 @@ public class FileSystemDocumentDao implements IDocumentDao {
      * of the document. In the folder the document is saved and a properties file
      * with the meta data of the document. 
      * 
-     * @see org.digital.archive.dao.IDocumentDao#insert(org.digital.archive.service.Document)
+     * @see org.murygin.archive.dao.IDocumentDao#insert(org.murygin.archive.service.Document)
      */
     @Override
     public void insert(Document document) {
@@ -68,28 +68,28 @@ public class FileSystemDocumentDao implements IDocumentDao {
         }
     }
     
-//    /**
-//     * Finds documents in the data store matching the given parameter.
-//     * To find a document all document meta data sets are iterated to check if they match
-//     * the parameter.
-//     * 
-//     * @see org.digital.archive.dao.IDocumentDao#findByPersonNameDate(java.lang.String, java.util.Date)
-//     */
-//    @Override
-//    public List<DocumentMetadata> findByPersonNameDate(String personName, Date date) {
-//        try {
-//            return findInFileSystem(personName,date);
-//        } catch (IOException e) {
-//            String message = "Error while finding document, person name: " + personName + ", date:" + date;
-//            LOG.error(message, e);
-//            throw new RuntimeException(message, e);
-//        }
-//    }
+    /**
+     * Finds documents in the data store matching the given parameter.
+     * To find a document all document meta data sets are iterated to check if they match
+     * the parameter.
+     * 
+     * @see org.murygin.archive.dao.IDocumentDao#findByPersonNameDate(java.lang.String, java.util.Date)
+     */
+    @Override
+    public List<DocumentMetadata> findByPersonNameDate(String personName, Date date) {
+        try {
+            return findInFileSystem(personName,date);
+        } catch (IOException e) {
+            String message = "Error while finding document, person name: " + personName + ", date:" + date;
+            LOG.error(message, e);
+            throw new RuntimeException(message, e);
+        }
+    }
     
     /**
      * Returns the document from the data store with the given UUID.
      * 
-     * @see org.digital.archive.dao.IDocumentDao#load(java.lang.String)
+     * @see org.murygin.archive.dao.IDocumentDao#load(java.lang.String)
      */
     @Override
     public Document load(String uuid) {
@@ -104,31 +104,31 @@ public class FileSystemDocumentDao implements IDocumentDao {
     }
     
 
-//    private List<DocumentMetadata> findInFileSystem(String personName, Date date) throws IOException  {
-//        List<String> uuidList = getUuidList();
-//        List<DocumentMetadata> metadataList = new ArrayList<DocumentMetadata>(uuidList.size());
-//        for (String uuid : uuidList) {
-//            DocumentMetadata metadata = loadMetadataFromFileSystem(uuid);         
-//            if(isMatched(metadata, personName, date)) {
-//                metadataList.add(metadata);
-//            }
-//        }
-//        return metadataList;
-//    }
+    private List<DocumentMetadata> findInFileSystem(String personName, Date date) throws IOException  {
+        List<String> uuidList = getUuidList();
+        List<DocumentMetadata> metadataList = new ArrayList<DocumentMetadata>(uuidList.size());
+        for (String uuid : uuidList) {
+            DocumentMetadata metadata = loadMetadataFromFileSystem(uuid);         
+            if(isMatched(metadata, personName, date)) {
+                metadataList.add(metadata);
+            }
+        }
+        return metadataList;
+    }
 
-//    private boolean isMatched(DocumentMetadata metadata, String personName, Date date) {
-//        if(metadata==null) {
-//            return false;
-//        }
-//        boolean match = true;
-//        if(personName!=null) {
-//            match = (personName.equals(metadata.getPersonName()));
-//        }
-//        if(match && date!=null) {
-//            match = (date.equals(metadata.getDocumentDate()));
-//        }
-//        return match;
-//    }
+    private boolean isMatched(DocumentMetadata metadata, String personName, Date date) {
+        if(metadata==null) {
+            return false;
+        }
+        boolean match = true;
+        if(personName!=null) {
+            match = (personName.equals(metadata.getPersonName()));
+        }
+        if(match && date!=null) {
+            match = (date.equals(metadata.getDocumentDate()));
+        }
+        return match;
+    }
 
     private DocumentMetadata loadMetadataFromFileSystem(String uuid) throws IOException {
         DocumentMetadata document = null;

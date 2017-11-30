@@ -15,11 +15,8 @@ public class Document extends DocumentMetadata implements Serializable {
     
     private byte[] fileData;
     
-   
-    
-    public Document( byte[] fileData, String fileName, Date uploadDate, String customerId,
-    		String fileType, String fileSource, String digitalSign, String digitalSignSource) {
-        super(fileName, uploadDate, customerId, fileType, fileSource,  digitalSign,  digitalSignSource);
+    public Document( byte[] fileData, String fileName, Date documentDate, String personName) {
+        super(fileName, documentDate, personName);
         this.fileData = fileData;
     }
 
@@ -28,9 +25,7 @@ public class Document extends DocumentMetadata implements Serializable {
     }
     
     public Document(DocumentMetadata metadata) {
-        super(metadata.getUuid(), metadata.getFileName(), metadata.getUploadDate(), metadata.getCustomerId(),
-        		metadata.getFileType(), metadata.getFileSource(), metadata.getDigitalSign(),
-        		metadata.getDigitalSignSource());
+        super(metadata.getUuid(), metadata.getFileName(), metadata.getDocumentDate(), metadata.getPersonName());
     }
 
     public byte[] getFileData() {
@@ -41,8 +36,7 @@ public class Document extends DocumentMetadata implements Serializable {
     }
     
     public DocumentMetadata getMetadata() {
-        return new DocumentMetadata(getUuid(), getFileName(), getUploadDate(), getCustomerId(),
-        		getFileType(), getFileSource(), getDigitalSign(), getDigitalSignSource());
+        return new DocumentMetadata(getUuid(), getFileName(), getDocumentDate(), getPersonName());
     }
     
 }

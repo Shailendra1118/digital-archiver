@@ -1,8 +1,13 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+﻿<html ng-app="archive">
 <head>
+<meta charset="utf8" />
     <title>Upload a New Document</title>
-    <!--<style class="Site.css"></style>-->
+
+<script src="lib/angular/angular-1.2.16.js"></script>
+
+<link rel="stylesheet" href="styles/styles.css"/>
+
+ <!--<style class="Site.css"></style>-->
     <link rel="stylesheet" href="Adobe.css" />
     <style type="text/css">
         .auto-style1 {
@@ -26,13 +31,19 @@
         color: skyblue;
         }
     </style>
-</head>
-<body>
 
-    <table style="padding: 0px; border-width: 0px; width:100%; border-spacing: 0px;">
+
+</head>
+
+
+
+<body>
+  <script src="app.js"></script>
+	<div ng-controller="UploadCtrl">
+    <table style="padding: 0px; border-width: 1px; width:100%; border-spacing: 0px;border: 1">
         <tr style="background-color: #C0C0C0">
             <td style="font-family: 'Berlin Sans FB Demi'; font-size: 48px; font-weight: bolder;color:green;" colspan="3">
-                <img alt="" height="100" src="GreenDocs2.png" width="100"/>GreenDocs - Go Paperless!</td>
+               <a href="home.html">   <img alt="" height="100" src="GreenDocs2.png" width="100"/></a>GreenDocs - Go Paperless!</td>
         </tr>
         <tr>
             <td class="auto-style2">&nbsp;</td>
@@ -41,38 +52,55 @@
         </tr>
         <tr>
             <td class="auto-style3">Welcome, User!</td>
-            <td ><input type="text" id="TP" value=" " /></td>
+            <td ></td>
             <td>&nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style3">
-                <img alt="" height="50" src="ViewDocs2.png" width="50"  />View My Documents</td>
-            <td class="styleDocs" >Browse file: <input type="file" id="Count" /> </td>
+               <a href="list.html">  <img alt="" height="50" src="ViewDocs2.png" width="50"  />View My Documents</a></td>
+            <td class="styleDocs" style="background-color: #F4F4F4" >
+           File Type <input type="text" ng-model="name">
+            </td>
+           
             <td>&nbsp;</td>
+            
+           
+            
+            
         </tr>
+        
         <tr>
             <td class="auto-style3">
-                <img alt="" height="50" src="Cloud2.png" width="50" />Upload New Document</td>
-            <td class="styleDocs" style="background-color: #F4F4F4"><img alt="" height="50" src="Dropbox.png" width="50" />&nbsp;&nbsp;Select Files from Dropbox</td>
+            
+            
+                 <a href="DocUpload.html">  <img alt="" height="50" src="Cloud2.png" width="50" />Upload New Document</a></td>
+            <td class="styleDocs" style="background-color: #F4F4F4">
+             Browse file: <input class="custom-file-input" file-model="myFile" type="file" id="Count" /> 
+            	</td>
             <td>&nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style3">
                 <img alt="" height="50" src="Signature.png" width="50" />
                 <a href="https://account.docusign.com/#/username" target="_blank">Sign Documents</a> </td>
-            <td class="styleDocs" style="background-color: #F4F4F4"><img alt="" height="50" src="Digilocker.png" width="50" />
-                 <a href="https://digilocker.gov.in/" target="_blank">&nbsp;&nbsp;Select Files from Digilocker</td>
+            <td class="styleDocs" style="background-color: #F4F4F4" >
+            
+            <div class="form-group"><button ng-click="uploadFile()">Upload</button></div>
+            </td>
             <td>&nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style3"><img alt="" height="50" src="VerifyDocs.png" width="50" />Verify Documents</td>
-            <td>&nbsp;</td>
+            <td class="styleDocs" style="background-color: #F4F4F4"><img alt="" height="50" src="Dropbox.png" width="50" />&nbsp;&nbsp;Select Files from Dropbox
+            
+            </td>
             <td>&nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style3">
                                 <img alt="" height="50" src="Logout.png" width="50" />Logout</td>
-            <td>&nbsp;</td>
+            <td class="styleDocs" style="background-color: #F4F4F4"><img alt="" height="50" src="Digilocker.png" width="50" />
+                 <a href="https://digilocker.gov.in/" target="_blank">&nbsp;&nbsp;Select Files from Digilocker</a></td>
             <td>&nbsp;</td>
         </tr>
         <tr>
@@ -106,6 +134,9 @@
             <td>&nbsp;</td>
         </tr>
     </table>
+   
+    </div>
+   
 
 </body>
 </html>

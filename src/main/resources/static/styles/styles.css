@@ -1,10 +1,10 @@
 body, html {
 	margin: 0;
 	padding: 0;
-	color: #ffffff;
-	background: #a7a09a;
+/* 	color: #746E85; */
+/* 	background: #a7a09a; */
 	font-family: Arial, sans-serif;
-	font-size: 14px;
+	font-size: .8em;
 }
 
 a:link {
@@ -28,9 +28,9 @@ a:active {
 }
 
 #wrap {
-	
+	width: 1750px;
 	margin: 0 auto;
-	background: #fff;
+/* 	background: #fff; */
 }
 
 #header {
@@ -62,7 +62,7 @@ h1 {
 
 #main {
 	float: left;
-	width: 478px;
+	width: 600px;
 	height: 400px;
 	padding: 10px;
 	background: #ffffff;
@@ -80,10 +80,10 @@ input {
 }
 
 #sidebar {
-	float: right;
-	width: 230px;
+	float: left;
+	width: 430px;
 	padding: 10px;
-	background: #ffffff;
+/* 	background: #ffffff; */
 }
 
 #footer {
@@ -174,12 +174,6 @@ input {
 	background: #F2F2F2;
 }
 
-.inputPadding{
-	padding-right:20px;
-		text-align:right;
-	padding-top:10px;
-}
-
 input {
-/* 	width: 220px; */
+	width: 220px;
 }
