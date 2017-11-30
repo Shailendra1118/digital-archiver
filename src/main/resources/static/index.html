@@ -25,7 +25,7 @@
     </style>
 </head>
 <body>
-    <form action="home.html">
+<!--     <form action="home.html"> -->
     <table style="padding: 0px; border-width: 0px; width:100%; border-spacing: 0px;top:0px;">
         <tr style="background-color: #C0C0C0;height:90px">
             <td style="font-family: 'Berlin Sans FB Demi'; font-size: 48px; font-weight: bolder;color:green" colspan="3">
@@ -59,7 +59,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><input id="Login" type="text"/></td>
+            <td><input id="loginName" type="text"/></td>
             <td>&nbsp;</td>
         </tr>
         <tr>
@@ -80,7 +80,7 @@
         <tr>
             <td class="auto-style3">&nbsp;</td>
             <td>
-            <input type="submit" value=" Login " style="background-color: #3399FF; color: #FFFFFF; 
+            <input type="button" value=" Login " onclick="completeAndRedirect()" style="background-color: #3399FF; color: #FFFFFF; 
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-weight: bold" />
            
             </td>
@@ -88,12 +88,20 @@
         </tr>
         <tr>
             <td class="auto-style3">&nbsp;</td>
-            <td>----------------------------------------------- OR ------------------------------------</td>
+            <td> OR </td>
             <td>&nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style3">&nbsp;</td>
-            <td><img alt="" src="GoogleSignin.png"/></td>
+            <td><img alt="" src="googleSign.JPG"/></td>
+            <td>&nbsp;</td>
+        </tr>
+         <tr>
+            <td class="auto-style3">&nbsp;</td>
+            <td><div id="fb-root">
+            	<img alt="" src="FBsign.JPG" onclick="Login()"/>
+            	</div>
+            </td>
             <td>&nbsp;</td>
         </tr>
         <tr>
@@ -162,6 +170,79 @@
             <td>&nbsp;</td>
         </tr>
     </table>
-        </form>
+<!--         </form> -->
+        
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+	<script type="text/javascript">
+	//window.loggedIn = "Guest";
+	function completeAndRedirect(){
+		sessionStorage.clear();
+		sessionStorage.setItem('username', document.getElementById("loginName").value);
+		window.location = 'http://localhost:8080/home.html';
+	}
+	window.fbAsyncInit = function () {
+		  FB.init({
+		    appId: '382628625526843',
+		    status: true,
+		    cookie: true,
+		    xfbml: true
+		  });
+		};
+
+		(function (doc) {
+		  var js;
+		  var id = 'facebook-jssdk';
+		  var ref = doc.getElementsByTagName('script')[0];
+		  if (doc.getElementById(id)) {
+		    return;
+		  }
+		  js = doc.createElement('script');
+		  js.id = id;
+		  js.async = true;
+		  js.src = "//connect.facebook.net/en_US/all.js";
+		  ref.parentNode.insertBefore(js, ref);
+		}(document));
+		
+		function Login() {
+			  FB.login(function (response) {
+			    if (response.authResponse) {
+			      FB.api('/me', function (response) {
+			    	 //console.log("response "+response.name);
+			    	// console.log("logged in: "+(window.loggedInName = response.name));
+			    	  window.location = 'http://localhost:8080/home.html';
+			    	  sessionStorage.setItem('username', response.name);
+			    	  alert("Successfully connected to Facebook! "+response.name);
+			        //document.getElementById("displayName").innerHTML = response.name;
+			       // document.getElementById("userName").innerHTML = response.username;
+			        //document.getElementById("userID").innerHTML = response.id;
+			       // document.getElementById("userEmail").innerHTML = response.email;
+			        FB.api('/me/picture?type=normal', function (response) {
+			          //document.getElementById("profileImage").setAttribute("src", response.data.url);
+			          console.log("Todo set profile image and name");
+			        });
+			      });
+			    } else {
+			      alert("Login attempt failed!");
+			    }
+			  }, { scope: 'email,user_photos,publish_actions' });
+			}
+		
+		
+	/*	 FB.Event.subscribe('auth.authResponseChange', function (response) {
+			  if (response.status === 'connected') {
+			    //alert("Successfully connected to Facebook!");
+			    window.loggedInName = response.name;
+			    console.log("logged in: "+window.loggedInName);
+			    alert("Successfully connected to Facebook! "+response.name);
+			    window.location = 'http://localhost:8080/home.html';
+			  }
+			  else if (response.status === 'not_authorized') {
+			    alert("Login failed!");
+			  } else {
+			    alert("Unknown error!");
+			  }
+			}); */
+		 
+	</script>
 </body>
 </html>

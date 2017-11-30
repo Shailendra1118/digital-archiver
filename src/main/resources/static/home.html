@@ -27,8 +27,8 @@
         }
     </style>
 </head>
-<body>
-
+<body>	
+	<p id="loggedInName"></p>
     <table style="padding: 0px; border-width: 0px; width:100%; border-spacing: 0px;">
         <tr style="background-color: #C0C0C0">
             <td style="font-family: 'Berlin Sans FB Demi'; font-size: 48px; font-weight: bolder;color:green;" colspan="3">
@@ -40,7 +40,7 @@
             <td class="auto-style1"></td>
         </tr>
         <tr>
-            <td class="auto-style3">Welcome, User!</td>
+            <td class="auto-style3">Welcome!</td>            
             <td ><input type="text" id="TP" value=" " />My Dashboard</td>
             <td>&nbsp;</td>
         </tr>
@@ -107,4 +107,13 @@
     </table>
 
 </body>
+
+<script>
+	window.onload = (function(){
+	    return function(){
+	    	document.getElementById("loggedInName").innerHTML = "Hello " + sessionStorage.getItem('username');
+	     };
+	})();
+</script>
+
 </html>
